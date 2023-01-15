@@ -30,7 +30,7 @@ The make_query(database) function connects to the specified SQLite database and 
 
 The get_xml(filename_save) function takes the data from the make_query() function and creates an XML file with the data. It first creates the root element "products" and then iterates through each product in the data, creating a "product" sub-element for each product. Within each "product" element, it creates sub-elements for specific data such as "id", "title", "description", "link", "image_link", "additional_image_link", "availability", "price", "brand", and "condition". The resulting XML file is saved to the specified filename.
 
-To run a script, navigate to the script's directory:
+To run a script, navigate to the script's directory and run a command:
 python generator.py
 
-*For the sake of safety, the database file is removed from the directory and needs to be added for testing. The file must have a name 'data.sqlite'.
+*For the sake of safety, the database file is removed from the directory and needs to be added into for testing. The file must have a name 'data.sqlite'.
