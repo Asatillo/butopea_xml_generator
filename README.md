@@ -1,36 +1,33 @@
-This script is used to create an XML file from data in a SQLite database. 
+# This script is used to create an XML file from data in a SQLite database. 
+This script exports data from an SQLite database and creates an XML file with the data. It uses Python's built-in sqlite3 and xml.etree.ElementTree modules to connect to the database, query the data and create the XML file.
 
-If the script is run as the main program, the get_xml() function is called with the predefined XML_FILENAME.
-+ ID [id]
-+ Title [title]
-+ Description [description]
-+ Link [link] 
-+ Image link [image_link]
-+ Additional image link [additional_image_link]
-+ Availability [availability]
-+ Price [price]
-+ Brand [brand]
-+ Condition [condition]
+# Getting started
+These instructions will help you get a copy of the project up and running on your local machine for development and testing purposes.
 
-Additional details:
-+ The field values included in the product feed conform to Google Merchant specifications
-+ Disabled products (with status `0`) are not included in the feed 
-+ All prices are in Hungarian Forints (HUF)
-+ Brand represents the product manufacturer
-+ All products are sold as new
-+ The base domain for product image URLs is `butopea.com`, for example: [`https://butopea.com/image/catalog/DEJEL-NS3TE[D]_1.jpg`](https://butopea.com/image/catalog/DEJEL-NS3TE%5BD%5D_1.jpg)
-+ Additional images are loaded in their respective sort orders
-+ The product link is constructed by appending the product ID to `https://butopea.com/p/`, for example: [`https://butopea.com/p/3927`](https://butopea.com/p/3927)
+# Prerequisites
++ Python 3
++ SQLite3
 
-The script includes two main functions: make_query(database) and get_xml(filename_save).
+# Installing
+1. Clone this repository to your local machine
+`git clone https://github.com/Asatillo/butopea_xml_generator.git`
 
-The varibles database and filname_save are taken from the config.py, from variables DATABASE_FILE and XML_FILENAME accordingly.
+2. Make sure the database file you want to export the data from is in the same directory as the script and the name of the file is specified in the configs.py file.
 
-The make_query(database) function connects to the specified SQLite database and creates a cursor. It then executes a query to select specific data from the "product", "product_image", "product_description", and "manufacturer" tables, and returns the result as a list of tuples.
+3. Run the script
+`python generator.py`
 
-The get_xml(filename_save) function takes the data from the make_query() function and creates an XML file with the data. It first creates the root element "products" and then iterates through each product in the data, creating a "product" sub-element for each product. Within each "product" element, it creates sub-elements for specific data such as "id", "title", "description", "link", "image_link", "additional_image_link", "availability", "price", "brand", and "condition". The resulting XML file is saved to the specified filename.
+# Script Description
+The script exports data from an SQLite database using the `make_query()` function that takes the name of the database file as an argument, creates a connection, a cursor and executes the query. The query returns the data in the form of a list of tuples.
 
-To run a script, navigate to the script's directory and run a command:
-python generator.py
+The `get_xml()` function takes the result of the query and creates an XML file with the data. It uses `xml.etree.ElementTree` module to create the structure of the XML file and writes it to a file with the name specified as an argument.
 
-*For the sake of safety, the database file is removed from the directory and needs to be added into for testing. The file must have a name 'data.sqlite'.
+# Built With
++ Python 3 - The programming language
++ SQLite3 - The database management system
++ xml.etree.ElementTree - The module used to create the XML file
+
+# Additional notes
++ The script uses the `configs.py` file to import the name of the database file and the name of the XML file to be created.
++ The script uses the `if __name__ == "__main__":` block to run the `get_xml()` function when the script is executed.
++ The script uses the `with open(filename_save, 'wb') as f:` block to write the XML file.
